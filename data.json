@@ -1,0 +1,26 @@
+  [
+    {
+      "name": "Ali",
+      "age": 25,
+      "city": "Istanbul",
+      "salary": 15000
+    },
+    {
+      "name": "Ayşe",
+      "age": null,
+      "city": "Ankara",
+      "salary": 18000
+    },
+    {
+      "name": "Mehmet",
+      "age": 30,
+      "city": null,
+      "salary": null
+    },
+    {
+      "name": "Zeynep",
+      "age": 22,
+      "city": "Izmir",
+      "salary": 17000
+    }
+  ]
