@@ -28,25 +28,34 @@ df_sorted = df.sort_values(by="salary", ascending=False)
 names = df_sorted["name"]
 salaries = df_sorted["salary"]
 
+plt.style.use("ggplot")
+
 plt.figure()
 
-bars = plt.bar(names, salaries)
+# Renk paleti (gradient gibi)
+colors = ["#FF6B6B", "#4ECDC4", "#522079", "#57D757"]
 
-# Ortalama çizgisi
+bars = plt.bar(names, salaries, color=colors)
+
+# Ortalama çizgi
 avg_salary = df["salary"].mean()
 plt.axhline(avg_salary, linestyle='--')
 plt.text(0, avg_salary, f"Avg: {int(avg_salary)}")
 
-# Değerleri yaz
+# Değerleri barların üstüne yaz
 for bar in bars:
     yval = bar.get_height()
-    plt.text(bar.get_x() + bar.get_width()/2, yval, int(yval), ha='center', va='bottom')
+    plt.text(bar.get_x() + bar.get_width()/2, yval, int(yval),
+             ha='center', va='bottom', fontsize=10)
 
-plt.title("Employee Salary Analysis")
+# Başlık ve stil
+plt.title("💰 Employee Salary Analysis", fontsize=14)
 plt.xlabel("Employees")
 plt.ylabel("Salary")
 
-plt.grid()
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+
+plt.tight_layout()
 
 plt.savefig("salary_chart.png")
 
