@@ -1,4 +1,5 @@
 import pandas as pd
+import matplotlib.pyplot as plt  
 
 # JSON oku
 df = pd.read_json("data.json")
@@ -21,20 +22,32 @@ print(df)
 # Analiz
 print("\nOrtalama maaş:", df["salary"].mean())
 
-import matplotlib.pyplot as plt
+# Maaşa göre sırala
+df_sorted = df.sort_values(by="salary", ascending=False)
 
-# İsim ve maaşları al
-names = df["name"]
-salaries = df["salary"]
+names = df_sorted["name"]
+salaries = df_sorted["salary"]
 
-# Grafik oluştur
 plt.figure()
-plt.bar(names, salaries)
 
-# Başlık ve etiketler
-plt.title("Çalışan Maaş Grafiği")
-plt.xlabel("İsim")
-plt.ylabel("Maaş")
+bars = plt.bar(names, salaries)
 
-# Göster
+# Ortalama çizgisi
+avg_salary = df["salary"].mean()
+plt.axhline(avg_salary, linestyle='--')
+plt.text(0, avg_salary, f"Avg: {int(avg_salary)}")
+
+# Değerleri yaz
+for bar in bars:
+    yval = bar.get_height()
+    plt.text(bar.get_x() + bar.get_width()/2, yval, int(yval), ha='center', va='bottom')
+
+plt.title("Employee Salary Analysis")
+plt.xlabel("Employees")
+plt.ylabel("Salary")
+
+plt.grid()
+
+plt.savefig("salary_chart.png")
+
 plt.show()
